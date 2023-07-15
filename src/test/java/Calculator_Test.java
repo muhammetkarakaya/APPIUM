@@ -4,7 +4,9 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -26,7 +28,7 @@ public class Calculator_Test {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"10.0");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");// Eger ki kullandigimiz android surumu 6 veya ustuyse UiAutomator2 kullanilir
         // Eger ki kullandigimiz android surumu 6 veya ustuyse UiAutomator2 kullanilir
-        capabilities.setCapability(MobileCapabilityType.APP,"C:\\Users\\msas\\IdeaProjects\\APPIUM-T113\\Apps\\Calculator_8.4.1 (520193683)_Apkpure.apk");
+        //capabilities.setCapability(MobileCapabilityType.APP,"C:\\Users\\msas\\IdeaProjects\\APPIUM-T113\\Apps\\Calculator_8.4.1 (520193683)_Apkpure.apk");
         // app capabilityType bir uygulamayi yuklemek istedigimizde indirdigimiz apk dosyasinin path uzantisini vererek o uygulamayi yuklemek icin kullandigimiz desiredCapability
         //  capabilities.setCapability("appPackage","com.google.android.calculator");
 
@@ -36,11 +38,27 @@ public class Calculator_Test {
         //driver.sendSMS("22222222222", "naber bro"); // bunu yaparken 27. satiri yporuma almak gerekir. app
 
 
-
+        driver.activateApp("com.google.android.calculator");
         // 2.  uygulamanin yuklendigini dogrular(isInstalled)
+        Assert.assertTrue(driver.isAppInstalled("com.google.android.calculator"));
 
         // 3. uygulamanin acildigini dogrular
+        AndroidElement acButton = driver.findElementByAccessibilityId("clear");
+        Assert.assertTrue(acButton.isDisplayed());
         // 4. carpma,bolme,toplama,cikarma islemleri yaparak sonuclari dogrular
+        driver.findElementByAccessibilityId("8").click();
+        driver.findElementByAccessibilityId("0").click();
+        driver.findElementByAccessibilityId("multiply").click();
+        driver.findElementByAccessibilityId("2").click();
+        driver.findElementByAccessibilityId("0").click();
+        driver.findElementByAccessibilityId("equals").click();
+
+
+        String sonuc =driver.findElementById("com.google.android.calculator:id/result_final").getText();
+        System.out.println(sonuc);
+
+        Assert.assertEquals(Integer.parseInt(sonuc),1600);
+
         // 5. AC butonuna tiklayarak ana ekrani temizler
 
 
