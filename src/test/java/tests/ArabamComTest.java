@@ -1,3 +1,5 @@
+package tests;
+
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -72,7 +74,51 @@ public class ArabamComTest {
         // yil secimi yapalim
         driver.findElementByXPath("//*[@text='2018']").click();
         // model secimi yapalim
+        driver.findElementByXPath("//*[@text='Passat']").click();
         // govde tipini secelim
+        driver.findElementByXPath("//*[@text='Sedan']").click();
+        // yakit tipini secelim
+        driver.findElementByXPath("//*[@text='Benzin']").click();
+        // vites tipini secelim
+        driver.findElementByXPath("//*[@text='Yarı Otomatik']").click();
+        // Versiyon secimi yapalim
+        // 428 1138
+        Thread.sleep(1000);
+        touchAction.press(PointOption.point(428,1138)).release().perform();
+        Thread.sleep(1000);
+        // aracin km bilgilerini girelim
+        if (driver.isKeyboardShown()){
+            driver.getKeyboard().pressKey("50000");
+        } else {
+            driver.findElementById("com.dogan.arabam:id/et_km").sendKeys("100000");
+        }
+
+        driver.findElementById("com.dogan.arabam:id/btn_price_prediction_submit").click();
+        // aracin rengini secelim
+        driver.findElementByXPath("//*[@text='Beyaz']").click();
+        // opsiyel donanim (varsa) seecelim
+        driver.findElementById("com.dogan.arabam:id/btnNext").click();
+        // degisen bilgisi ekleyerek tramer kaydi belirtelim
+        driver.findElementById("com.dogan.arabam:id/iv_B0901").click();
+        driver.findElementByXPath("//*[@text='Değişmiş']").click();
+        Thread.sleep(1000);
+
+
+        // driver.findElementByXPath("com.dogan.arabam:id/btn_next").click(); // Eger locate duzgun calismaz ise Koordinatlar uzerinden tiklama islemini devam ettirebiliriz.
+        touchAction.press(PointOption.point(529,1686)).release().perform();
+        driver.findElementByXPath("//*[@text='Bilmiyorum']").click();
+
+        // driver.findElementByXPath("com.dogan.arabam:id/btn_next").click();
+        touchAction.press(PointOption.point(529,1686)).release().perform();
+        Thread.sleep(1000);
+        // aracimizin fiyatinin 500000 tl den fazla oldugunu test edelim
+        String aracinFiyati=driver.findElementById("com.dogan.arabam:id/tvAveragePrice").getText();
+        aracinFiyati=aracinFiyati.replaceAll("\\D",""); // 1.550.000 Tl
+        System.out.println(aracinFiyati); //1550000
+
+        Assert.assertTrue(Integer.parseInt(aracinFiyati)>500000);
+        // uygulamayi kapatalim
+        //driver.closeApp();
 
     }
 }
