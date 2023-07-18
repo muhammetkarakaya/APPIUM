@@ -2,6 +2,7 @@ package tests.test04;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Driver;
 
@@ -22,7 +23,14 @@ public class KiwiCom {
 
     @Test
     public void kiwiTest(){
-        System.out.println(driver.getDeviceTime());
+        // uygulamanin yuklendigi dogrulanir
+        Assert.assertTrue(driver.isAppInstalled("com.skypicker.main"));
+        // uygulamanin basariyla acildigi dogrulanir
+        AndroidElement guest=driver.findElementByXPath("//*[@text='Continue as a guest']");
+        Assert.assertTrue(guest.isDisplayed());
+        // misafir olarak devam et e tiklanir
+        // ardinda gelecek olan 3 adimada yesil butona basilarak devam edilir
+
     }
 
 

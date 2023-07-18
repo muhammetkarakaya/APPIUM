@@ -32,10 +32,11 @@ public class Driver {
             caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, ANDROIDVERSION);
             caps.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM);
             caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, OTOMASYON_ISMI);
-            caps.setCapability("appPackage","com.dogan.arabam");
-            caps.setCapability("appActivity","com.dogan.arabam.presentation.feature.home.HomeActivity");
-            //  caps.setCapability(MobileCapabilityType.NO_RESET,false); // true uygulama sifirlanmiyor onceki adimlari muhafaza ediyor
-            //false ise her test baslangicinda sifirliyor
+            caps.setCapability("appPackage","com.skypicker.main");
+            caps.setCapability("appActivity","com.kiwi.android.feature.splash.impl.ui.SplashActivity");
+            //  caps.setCapability(MobileCapabilityType.NO_RESET,false);
+            // true uygulama sifirlanmiyor onceki adimlari muhafaza ediyor
+            //false ise her test baslangicinda sifirliyor ve uygulama en bastan basliyor
 
             if (ConfigReader.getProperty("platformName").equals("Android")) {
 
