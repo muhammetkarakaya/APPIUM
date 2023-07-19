@@ -1,12 +1,15 @@
 package pages;
 
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Driver;
+
+import java.time.Duration;
 
 public class KiwiPage {
     public KiwiPage(){
@@ -44,5 +47,19 @@ public class KiwiPage {
         TouchAction touchAction=new TouchAction<>(Driver.getAndroidDriver());
         touchAction.press(PointOption.point(xKoordinat,yKoordinat)).release().perform();
         Thread.sleep(bekleme);
+    }
+
+    public void ekranAltKaydirma(int xKoordinat, int yKoordinat, int wait, int mxKoordinat, int myKoordinat, int bekleme) throws InterruptedException {
+        TouchAction touchAction = new TouchAction(Driver.getAndroidDriver());
+        touchAction
+                .press(PointOption.point(xKoordinat,yKoordinat))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(wait)))
+                .moveTo(PointOption.point(mxKoordinat,myKoordinat))
+                .release()
+                .perform();
+
+        Thread.sleep(bekleme);
+
+
     }
 }
