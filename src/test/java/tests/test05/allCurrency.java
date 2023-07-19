@@ -2,11 +2,15 @@ package tests.test05;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import pages.AllCurrencyPage;
 import utils.Driver;
 import utils.ReusableMethods;
 
+import java.io.File;
 import java.io.IOException;
 
 public class allCurrency {
@@ -19,7 +23,7 @@ public class allCurrency {
     // cevrilen tutar screenShot olarak kaydedilir
     // Ardindan zloty nin tl karsiligi olan tl degeri kaydedilir
     // bu islem dolar tl, sweden kron-tl, Japon yeni- tl olarak tekrarlanir ve kullaniciya sms olarak bildirilir
-
+    @Test
     private void allCurrencyTest() throws InterruptedException, IOException {
         // all currency uygulamasinin yuklendigi dogulanir
         Assert.assertTrue(driver.isAppInstalled("com.smartwho.SmartAllCurrencyConverter"));
@@ -40,10 +44,10 @@ public class allCurrency {
         currency.sifir.click();
         currency.sifir.click();
         // cevrilen tutar screenShot olarak kaydedilir
-        /*
-        File fileSS =driver.getScreenshotAs(OutputType.FILE); // ScreenShot i cekecek olan satir
-        FileUtils.copyFile(fileSS,new File("zlotyToTl.jpg")); //FileUtils classindan bir kopya olustururak gormek istedigimiz degerin ismini path olarak girdigimiz onun kopyasini utilsden bizim icin olusturuyor
-        */
+
+        //File fileSS =driver.getScreenshotAs(OutputType.FILE); // ScreenShot i cekecek olan satir
+        //FileUtils.copyFile(fileSS,new File("zlotyToTl.jpg")); //FileUtils classindan bir kopya olustururak gormek istedigimiz degerin ismini path olarak girdigimiz onun kopyasini utilsden bizim icin olusturuyor
+
         ReusableMethods.getScreenshot("zlotyToTl");
 
         // Ardindan zloty nin tl karsiligi olan tl degeri kaydedilir
